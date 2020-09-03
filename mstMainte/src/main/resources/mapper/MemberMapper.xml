@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="com.training.mstmainte.mapper.MemberMapper">
+	
+	<select id="loginMember" parameterType="hashmap" resultType="com.training.mstmainte.repository.MemberVO">
+		SELECT * FROM mst_member
+		WHERE memberId = #{inputId} AND memberPass = #{inputPass}
+	</select>
+
+	<select id="getMember" resultType="com.training.mstmainte.repository.MemberVO">
+	</select>
+	
+</mapper>

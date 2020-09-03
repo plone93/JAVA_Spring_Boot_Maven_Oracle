@@ -1,0 +1,19 @@
+create table mst_goods
+	(
+	goodsNumber varchar2(50) primary key,
+	goodsName varchar2(50),
+	goodsId varchar2(50),
+	goodsPrice number(50),
+	goodsCost number(50),
+	insertDate date default null,
+	updateDate date default null
+	);
+	
+	create table mst_meber
+	(
+	memberNumber number(50) primary key,
+	memberId varchar2(50),
+	memberPass varchar2(50)
+	);
+create sequence mst_member_seq start with 1 increment by 1;
+//start with 1: 1부터 시작해서 increment by 1 : 1씩 증가
