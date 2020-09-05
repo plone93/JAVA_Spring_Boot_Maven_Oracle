@@ -48,27 +48,6 @@
 	  </ul>
 	</div>
 	
-
-	<div class="row" ><!-- row: col-12 -->
-	  <div class="col-sm-6 col-md-4" th:each="board : ${boardList}">
-	    <div class="thumbnail">
-	      <img src="..." alt="...">
-	      <div class="caption">
-	        <h3><span th:text="${board.goodsId}"></span></h3>
-	        <p>商品コード : <span th:text="${board.goodsNumber}"></span></p>
-	        <p>商品名 : <span th:text="${board.goodsName}"></span></p>
-	        <p>商品価格 : <span th:text="${board.goodsPrice}"></span></p>
-	        <p>登録日 : <span th:text="${#dates.format(board.insertDate, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
-	        <p>更新日 : <span th:text="${#dates.format(board.updateDate, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
-	        <p><a href="#" class="btn btn-primary" role="button">詳細</a>
-	           <a th:if="${session.loginMember != null}" th:href="@{editboard(goodsNumber=${board.goodsNumber})}" class="btn btn-default" role="button">編集</a>
-	        </p>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	
     
     <div class="panel panel-default">
       <table class="table">

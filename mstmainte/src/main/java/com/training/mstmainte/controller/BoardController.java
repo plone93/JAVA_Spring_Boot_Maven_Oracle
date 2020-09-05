@@ -1,5 +1,6 @@
 package com.training.mstmainte.controller;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.training.mstmainte.repository.BoardVO;
 import com.training.mstmainte.service.BoardService;
@@ -80,8 +82,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/insertedBoard", method = RequestMethod.POST)
-	public String insertedBoard(BoardVO boardVO) {
+	public String insertedBoard(@RequestParam("fileName")MultipartFile fileName,
+								BoardVO boardVO) {
 		String url = "redirect:/board/boardList"; // 리다이렉트는 컨트롤러 내 맵핑 주소
+		
+		/*파일 업로드*/
+		try {
+			boardVO.setFileName(fileName.getOriginalFilename());
+			fileName.transferTo(new File("url"+fileName.getOriginalFilename()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		boardService.insertBoard(boardVO);
 		
 		return url;

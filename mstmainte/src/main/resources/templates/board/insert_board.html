@@ -22,7 +22,7 @@
   <div class="container">
 	<h1>商品作成</h1>
 	
-	<form method="POST" th:action="@{insertedBoard}" name="form" onsubmit="return InsertCheck()">
+	<form method="POST" th:action="@{insertedBoard}" name="form" enctype="multipart/form-data" onsubmit="return InsertCheck()">
 	<!-- th:object 해당 태그내에서 사용할 객체 선언, 태그 안에서 *{}안에 필드명을 입력-->
 		
 		<div class="row my-3 pl-5">
@@ -67,6 +67,15 @@
 			    </select>
 			    <input type="hidden" value="0" id="goodsId" name="goodsId">
 			</div>
+        </div>
+        
+        <div class="row my-3 pl-5">
+       	  <div class="col-3">
+       		 <label for="ID">商品イメージ</label>
+      	  </div>
+       	  <div class="col-6">
+       		 <input type="file" class="form-control" name="fileName" id="fileName" placeholder="">
+          </div>
         </div>
         
 		<div>
