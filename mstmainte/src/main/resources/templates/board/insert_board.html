@@ -25,58 +25,39 @@
 	<form method="POST" th:action="@{insertedBoard}" name="form" enctype="multipart/form-data" onsubmit="return InsertCheck()">
 	<!-- th:object 해당 태그내에서 사용할 객체 선언, 태그 안에서 *{}안에 필드명을 입력-->
 		
-		<div class="row my-3 pl-5">
-       	  <div class="col-3">
+		<div class="form-group">
        		 <label for="code">商品コード</label>
-      	  </div>
-       	  <div class="col-6">
        		 <input type="text" class="form-control" name="goodsNumber" id="goodsNumber" placeholder="数字10桁">
-          </div>
-          <div class="col-2">
        		 <button type="button" class="btn btn-default navbar-btn" value="0" id="checkGoodsNumber">Check</button>
-          </div>
         </div>
 
-		<div class="row my-3 pl-5">
-       	  <div class="col-3">
+		<div class="form-group">
        		 <label for="ID">商品名前</label>
-      	  </div>
-       	  <div class="col-6">
        		 <input type="text" class="form-control" name="goodsName" id="goodsName" placeholder="">
-          </div>
         </div>
         		
-		<div class="row my-3 pl-5">
-       	  <div class="col-3">
+		<div class="form-group">
        		 <label for="ID">商品価格</label>
-      	  </div>
-       	  <div class="col-6">
        		 <input type="text" class="form-control" name="goodsPrice" id="goodsPrice" placeholder="">
-          </div>
         </div>
 		
-		<div class="row my-3 pl-5">
-       	  <div class="col-3">
+		<div class="form-group">
        		 <label for="ID">商品分類</label>
-      	  </div>
-			<div class="btn-group-vertical" role="group" aria-label="...">
+			 <div class="btn-group-vertical" role="group" aria-label="...">
 			      <select class="form-control" id="selectBox" onchange="selected(this)">
 			        <option th:value="衣類" selected>衣類</option>
 			        <option th:value="食品">食品</option>
 			        <option th:value="他">他</option>
 			    </select>
 			    <input type="hidden" value="0" id="goodsId" name="goodsId">
-			</div>
+			 </div>
         </div>
         
-        <div class="row my-3 pl-5">
-       	  <div class="col-3">
-       		 <label for="ID">商品イメージ</label>
-      	  </div>
-       	  <div class="col-6">
-       		 <input type="file" class="form-control" name="fileName" id="fileName" placeholder="">
-          </div>
-        </div>
+		<div class="form-group">
+			<label for="exampleInputFile">商品イメージ</label>
+		    <input type="file" name="files" id="files">
+		    <p class="help-block">여기에 블록레벨 도움말 예제</p>
+		</div>        
         
 		<div>
 			<button type="submit" class="btn btn-default navbar-btn">作成完了</button>

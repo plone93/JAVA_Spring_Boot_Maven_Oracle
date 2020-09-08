@@ -1,6 +1,6 @@
 package com.training.mstmainte.controller;
 
-import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,12 @@ import com.training.mstmainte.service.BoardService;
 @RequestMapping("/board")
 public class BoardController {
 	
+	private static String UPLOAD_PATH = "/images/";
+	
 	@Autowired
 	private BoardService boardService;
 
-	
+
 	@RequestMapping(value = "/boardList", method = RequestMethod.GET)
 	public String boardList(BoardVO boardVO,
 							Model model) {
@@ -82,18 +84,35 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/insertedBoard", method = RequestMethod.POST)
-	public String insertedBoard(@RequestParam("fileName")MultipartFile fileName,
+	public String insertedBoard(@RequestParam("files")MultipartFile files,
 								BoardVO boardVO) {
 		String url = "redirect:/board/boardList"; // 리다이렉트는 컨트롤러 내 맵핑 주소
+		System.out.println(files);//org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@3331f6b8
+		if(files.isEmpty()) {//파일이 업로드 되지 않았다면
+			 
+		}
 		
-		/*파일 업로드*/
 		try {
-			boardVO.setFileName(fileName.getOriginalFilename());
-			fileName.transferTo(new File("url"+fileName.getOriginalFilename()));
+			boardService.uploadFile(Arrays.asList(files));//배열을 리스트로 변환
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+		boardVO.setFileName(UPLOAD_PATH + files.getOriginalFilename());//file.getoriginalFiename : 파일명 뽑아내기
 		boardService.insertBoard(boardVO);
+		
+		return url;
+	}
+	
+	/*보드 뷰*/
+	@RequestMapping(value = "/viewBoard", method = RequestMethod.GET)
+	public String viewBoard(BoardVO boardVO,
+							Model model) {
+		String url = "/board/view_board";
+		
+		boardVO = boardService.viewBoard(boardVO);
+		model.addAttribute("boardVO", boardVO);
 		
 		return url;
 	}
@@ -101,7 +120,7 @@ public class BoardController {
 	/*編集*/
 	@RequestMapping(value = "/editboard", method = RequestMethod.GET)
 	public String editBoard(BoardVO boardVO,
-					   Model model) {
+					   	    Model model) {
 		String url = "/board/edit_board";
 		
 		boardVO = boardService.viewBoard(boardVO);

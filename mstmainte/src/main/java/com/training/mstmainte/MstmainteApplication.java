@@ -8,7 +8,7 @@ import com.training.mstmainte.repository.BoardVO;
 
 @SpringBootApplication
 @EnableConfigurationProperties({
-	BoardVO.class
+	BoardVO.class 
 })
 public class MstmainteApplication {
 

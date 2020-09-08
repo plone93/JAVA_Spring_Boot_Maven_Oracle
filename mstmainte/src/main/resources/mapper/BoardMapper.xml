@@ -19,8 +19,8 @@
 	</select>
 	
 	<insert id="insertBoard">
-		insert into mst_goods(goodsNumber, goodsName, goodsId, goodsPrice, insertDate, updateDate)
-		values(#{goodsNumber}, #{goodsName}, #{goodsId}, #{goodsPrice}, sysdate, sysdate)
+		insert into mst_goods(goodsNumber, goodsName, goodsId, goodsPrice, insertDate, updateDate, fileName)
+		values(#{goodsNumber}, #{goodsName}, #{goodsId}, #{goodsPrice}, sysdate, sysdate, #{fileName})
 	</insert>
 	
 	<update id="updateBoard">

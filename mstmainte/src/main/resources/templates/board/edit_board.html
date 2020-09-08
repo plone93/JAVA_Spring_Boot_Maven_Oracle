@@ -24,43 +24,47 @@
 	
 	<form method="POST" th:object="${boardVO}" th:action="@{editedBoard}" name="form" onsubmit="return InsertCheck()">
 	<!-- th:object 해당 태그내에서 사용할 객체 선언, 태그 안에서 *{}안에 필드명을 입력-->
-		
-		<div class="row my-3 pl-5">
-       	  <div class="col-3">
+		<div class="form-group">
        		 <label for="code">商品コード</label>
-      	  </div>
-       	  <div class="col-6">
-       		 <input type="text" class="form-control" name="goods_number" id="goods_number" th:field="*{goodsNumber}">
-          </div>
+       		 <input type="text" class="form-control" name="goodsNumber" id="goodsNumber" th:field="*{goodsNumber}" placeholder="数字10桁">
+       		 <button type="button" class="btn btn-default navbar-btn" value="0" id="checkGoodsNumber">Check</button>
         </div>
 
-		<div class="row my-3 pl-5">
-       	  <div class="col-3">
+		<div class="form-group">
        		 <label for="ID">商品名前</label>
-      	  </div>
-       	  <div class="col-6">
-       		 <input type="text" class="form-control" name="goods_name" id="goods_name" th:field="*{goodsName}" placeholder="">
-          </div>
+       		 <input type="text" class="form-control" name="goodsName" id="goodsName" th:field="*{goodsName}" placeholder="">
         </div>
         		
-		<div class="row my-3 pl-5">
-       	  <div class="col-3">
+		<div class="form-group">
        		 <label for="ID">商品価格</label>
-      	  </div>
-       	  <div class="col-6">
-       		 <input type="text" class="form-control" name="goods_price" id="goods_price" th:field="*{goodsPrice}" placeholder="">
-          </div>
+       		 <input type="text" class="form-control" name="goodsPrice" id="goodsPrice" th:field="*{goodsPrice}" placeholder="">
         </div>
 		
+		<div class="form-group">
+       		 <label for="ID">商品分類</label>
+			 <div class="btn-group-vertical" role="group" aria-label="...">
+			      <select class="form-control" id="selectBox" onchange="selected(this)">
+			        <option th:value="衣類" selected>衣類</option>
+			        <option th:value="食品">食品</option>
+			        <option th:value="他">他</option>
+			    </select>
+			    <input type="hidden" value="0" id="goodsId" name="goodsId">
+			 </div>
+        </div>
+        
+		<div class="form-group">
+			<label for="exampleInputFile">商品イメージ</label>
+		    <input type="file" name="fileName" id="fileName">
+		    <p class="help-block">여기에 블록레벨 도움말 예제</p>
+		</div>  
+				
 		<div>
 			<button type="submit" class="btn btn-default navbar-btn">修正完了</button>
 			<a class="btn btn-default navbar-btn" th:href="@{deleteBoard(goodsNumber=*{goodsNumber})}">削除</a>
 			<a class="btn btn-default navbar-btn" th:href="@{boardList}">キャンセル</a>
 		</div>
 	</form>
-	
 	</div>
-	
-  </body>
 
+  </body>
 </html>

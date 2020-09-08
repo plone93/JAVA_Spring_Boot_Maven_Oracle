@@ -1,6 +1,9 @@
 package com.training.mstmainte.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.training.mstmainte.repository.BoardVO;
 
@@ -17,4 +20,6 @@ public interface BoardService {
 	public List<BoardVO> selectBoardDress(BoardVO boardVO);
 	public List<BoardVO> selectBoardEat(BoardVO boardVO);
 	public List<BoardVO> selectBoardEtc(BoardVO boardVO);
+	
+	public void uploadFile(List<MultipartFile> files) throws IOException;//파일업로드
 }
