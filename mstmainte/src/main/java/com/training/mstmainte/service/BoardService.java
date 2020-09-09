@@ -21,5 +21,5 @@ public interface BoardService {
 	public List<BoardVO> selectBoardEat(BoardVO boardVO);
 	public List<BoardVO> selectBoardEtc(BoardVO boardVO);
 	
-	public void uploadFile(List<MultipartFile> files) throws IOException;//파일업로드
+	public void uploadFile(List<MultipartFile> files, String fileName) throws IOException;//파일업로드
 }
