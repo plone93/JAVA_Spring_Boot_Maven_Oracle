@@ -20,7 +20,7 @@ import com.training.mstmainte.service.BoardService;
 @RequestMapping("/board")
 public class BoardController {
 	
-	private static String UPLOAD_PATH = "/images/";//스프링 내에서 이미지 파읽 경로는 static폴터부터 시작하는데, 파일쓰기를 할때는 최상위 프로젝트 폴더부터 시작함, 그래서 구분해서 선언할 필요가 있음
+	private static final String UPLOAD_PATH = "/images/";//스프링 내에서 이미지 파읽 경로는 static폴터부터 시작하는데, 파일쓰기를 할때는 최상위 프로젝트 폴더부터 시작함, 그래서 구분해서 선언할 필요가 있음
 	
 	@Autowired
 	private BoardService boardService;
@@ -32,6 +32,7 @@ public class BoardController {
 		String url = "/board/board_list";
 		
 		List<BoardVO> boardList = boardService.selectBoard();
+		System.out.println(boardList);
 		model.addAttribute("boardList", boardList);
 		
 		return url;
@@ -88,19 +89,23 @@ public class BoardController {
 	public String insertedBoard(@RequestParam("files")MultipartFile files,
 								BoardVO boardVO) {
 		String url = "redirect:/board/boardList"; // 리다이렉트는 컨트롤러 내 맵핑 주소
+		String fileName = "";
 
 		if(files.isEmpty()) {//파일이 업로드 되지 않았다면
-			 
+			boardVO.setFileName(fileName);
+		} else {//파일이 업로드 되었다면
+			UUID uuid = UUID.randomUUID();// OR String uuidStr = UUID.randomUUID().toString();// 128비트 난수 랜덤 생성, EX) abb4154b-6e87-4611-a0cc-f802804c104d 
+			fileName = uuid+"_"+files.getOriginalFilename();
+			boardVO.setFileName(UPLOAD_PATH + fileName);//file.getoriginalFiename : 파일명 뽑아내기
 		}
-		UUID uuid = UUID.randomUUID();// OR String uuidStr = UUID.randomUUID().toString();// 128비트 난수 랜덤 생성, EX) abb4154b-6e87-4611-a0cc-f802804c104d 
-		String fileName = uuid+"_"+files.getOriginalFilename();
-		boardVO.setFileName(UPLOAD_PATH + fileName);//file.getoriginalFiename : 파일명 뽑아내기
-		
+
 		try {
 			boardService.uploadFile(Arrays.asList(files), fileName);//배열을 리스트로 변환
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println(boardVO.getFileName());
 
 		boardService.insertBoard(boardVO);//추가필요// 업로드 파일명 크기가 DB파일명 사이즈보다 크면 안들어가는 문제
 		

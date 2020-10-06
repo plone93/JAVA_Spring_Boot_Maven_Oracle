@@ -81,11 +81,12 @@ public class BoardServiceImpl implements BoardService{
 		for(MultipartFile file : files) {
 			if(file.isEmpty()) { //파일이 업로드 되지 않았다면
 				continue;
+			} else {//파일이 업로드 되었다면
+				byte[] bytes = file.getBytes();		
+				Path path = Paths.get(UPLOAD_PATH + fileName); //경로 + 파일이름
+				Files.write(path, bytes);
 			}
-			byte[] bytes = file.getBytes();		
-			Path path = Paths.get(UPLOAD_PATH + fileName); //경로 + 파일이름
-			Files.write(path, bytes);
-			
+
 			//String pathSTR = UPLOAD_PATH + file.getOriginalFilename(); x
 			//System.out.println(path); //.\src\main\resources\static\images\201097.jpg
 			//System.out.println(pathSTR); // ./src/main/resources/static/images/201097.jpg, Files.write 메소드가 인식못함 x
