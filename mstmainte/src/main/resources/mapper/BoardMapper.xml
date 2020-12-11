@@ -3,8 +3,19 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper	namespace="com.training.mstmainte.mapper.BoardMapper">
+	
+	<resultMap id="boardMap" type="com.training.mstmainte.repository.BoardVO">
+		<id column="GOODSNUMBER" property="goodsNumber"/>
+		<result column="GOODSNAME" property="goodsName"/>
+		<result column="GOODSID" property="goodsId"/>
+		<result column="GOODSPRICE" property="goodsPrice"/>
+		<result column="GOODSCOST" property="goodsCost"/>
+		<result column="INSERTDATE" property="insertDate"/>
+		<result column="UPDATEDATE" property="updateDate"/>
+		<result column="FILENAME" property="fileName"/>
+	</resultMap>
 
-	<select id="selectBoard" resultType="com.training.mstmainte.repository.BoardVO">
+	<select id="selectBoard" resultMap="boardMap">
 		select * from mst_goods
 	</select>
 	
@@ -56,4 +67,5 @@
 		select * from mst_goods
 		where goodsId = #{goodsId}
 	</select>
+
 </mapper>
